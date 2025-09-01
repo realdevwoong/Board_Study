@@ -1,18 +1,18 @@
 import state
 from multiline_input import multiline_input
 
-def update_post(self):
+def update_post():
         pid = input("수정할 ID: ").strip()
         if not pid.isdigit():
             print("ID는 숫자입니다.\n")
             return
         pid = int(pid)
-        idx = next((i for i, x in enumerate(self.posts) if x["id"] == pid), -1)
+        idx = next((i for i, x in enumerate(state.posts) if x["id"] == pid), -1)
         if idx < 0:
             print("해당 글이 없습니다.\n")
             return
         
-        cur = self.posts[idx]
+        cur = state.posts[idx]
         print(f"\n[수정] 현재 제목: {cur['title']}")
         new_title = input("새 제목(Enter면 유지): ").strip() or cur["title"]
         
@@ -24,7 +24,7 @@ def update_post(self):
         
         if edit_content == 'y':
             print("- 새 내용 입력 (끝 입력 시 종료) -")
-            new_content = self._multiline_input()
+            new_content = multiline_input()
         else:
             new_content = cur["content"]
         
